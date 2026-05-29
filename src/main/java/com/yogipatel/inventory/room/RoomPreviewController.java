@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RoomPreviewController {
-    @GetMapping("api/structure-preview")
+    @GetMapping("/api/structure-preview")
     public Map<String, Object> getStructurePreview() {
 
         Map<String, Object> glueSticks = Map.of("name", "Glue Sticks", "quantityAvailable", 1);
@@ -21,7 +21,7 @@ public class RoomPreviewController {
 
         Map<String, Object> bookshelfCabinet = Map.of("name", "Shishu Mandal Bookshelf", "bins", List.of());
 
-       Map<String, Object> room = Map.of("name", "Shishu Mandal", "cabinets", List.of(sideCabinet, bookshelfCabinet));
+        Map<String, Object> room = Map.of("name", "Shishu Mandal", "cabinets", List.of(sideCabinet, bookshelfCabinet));
 
         return Map.of("rooms", List.of(room));
     }
