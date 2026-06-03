@@ -1,28 +1,31 @@
 package com.yogipatel.inventory.room;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yogipatel.inventory.room.dto.BinPreviewResponse;
+import com.yogipatel.inventory.room.dto.CabinetPreviewResponse;
+import com.yogipatel.inventory.room.dto.ItemPreviewResponse;
+import com.yogipatel.inventory.room.dto.RoomPreviewResponse;
+import com.yogipatel.inventory.room.dto.StructurePreviewResponse;
 
 
 @RestController
 public class RoomPreviewController {
     @GetMapping("/api/structure-preview")
-    public Map<String, Object> getStructurePreview() {
+    public StructurePreviewResponse getStructurePreview() {
+        ItemPreviewResponse glueSticks = new ItemPreviewResponse("Glue Sticks", 1);
 
-        Map<String, Object> glueSticks = Map.of("name", "Glue Sticks", "quantityAvailable", 1);
+        BinPreviewResponse adhesiveBin = new BinPreviewResponse("Adhesive Bin", List.of(glueSticks));
 
-        Map<String, Object> adhesiveBin = Map.of("name", "Adhesive Bin", "items", List.of(glueSticks));
+        CabinetPreviewResponse sideCabinet = new CabinetPreviewResponse("Shishu Mandal Side Cabinet", List.of(adhesiveBin));
 
-        Map<String, Object> sideCabinet = Map.of("name", "Shishu Mandal Side Cabinet", "bins", List.of(adhesiveBin));
+        CabinetPreviewResponse bookshelfCabinet = new CabinetPreviewResponse("Shishu Mandal Bookshelf", List.of());
 
-        Map<String, Object> bookshelfCabinet = Map.of("name", "Shishu Mandal Bookshelf", "bins", List.of());
+        RoomPreviewResponse smRoom = new RoomPreviewResponse("Shishu Mandal", List.of(sideCabinet, bookshelfCabinet));
 
-        Map<String, Object> room = Map.of("name", "Shishu Mandal", "cabinets", List.of(sideCabinet, bookshelfCabinet));
-
-        return Map.of("rooms", List.of(room));
+        return new StructurePreviewResponse(List.of(smRoom));
     }
 }
