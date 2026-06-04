@@ -15,7 +15,7 @@ public class RoomService {
     public List<Room> getAllRooms() {
         return roomRepository.findAllByOrderByNameAsc();
     }
-
+    
     public Room createRoom(String name, String description) {
         Room room = new Room(name, description);
         return roomRepository.save(room);
